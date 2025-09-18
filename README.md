@@ -1,9 +1,7 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Hola Bienvendido!, aquí encunetras uno par de pasos para ocupar este proyecto 
+## Para levantar el Proyecto
 
-## Getting Started
-
-First, run the development server:
-
+Para levantar el proyecto
 ```bash
 npm run dev
 # or
@@ -14,23 +12,27 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+debes instalar esto de manera global antes de correr el proyecto
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+```bash
+    npm install -g json-server
+```
 
-To learn more about Next.js, take a look at the following resources:
+para ver las API's a utilizar usa el comando que es obligatorio para hacer uso del proyecto
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+  json-server --watch db.json --port 3001
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+luego, al ingresar al proyecto en la ruta de la carpeta general... haran lo siguiente
 
-## Deploy on Vercel
+```bash
+  npm i
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+esto instalará las dependencias necesarias para correr el proyecto
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
