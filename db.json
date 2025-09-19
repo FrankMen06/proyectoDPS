@@ -30,22 +30,6 @@
   ],
   "projects": [
     {
-      "id": "1",
-      "title": "Sistema de Gestión de Inventario",
-      "description": "Desarrollo de un sistema web para gestionar el inventario de la empresa, incluyendo productos, proveedores y reportes.",
-      "status": "en_progreso",
-      "priority": "alta",
-      "startDate": "2024-01-20",
-      "endDate": "2024-03-15",
-      "createdBy": "1",
-      "assignedUsers": ["2", "3"],
-      "progress": 65,
-      "budget": 15000,
-      "category": "desarrollo_web",
-      "createdAt": "2024-01-20T09:00:00.000Z",
-      "updatedAt": "2024-02-10T14:30:00.000Z"
-    },
-    {
       "id": "2",
       "title": "App Móvil de Delivery",
       "description": "Aplicación móvil para servicio de delivery con geolocalización, pagos en línea y tracking en tiempo real.",
@@ -54,34 +38,20 @@
       "startDate": "2024-03-01",
       "endDate": "2024-06-30",
       "createdBy": "1",
-      "assignedUsers": ["2"],
+      "assignedUsers": [
+        "2"
+      ],
       "progress": 10,
       "budget": 25000,
       "category": "desarrollo_movil",
       "createdAt": "2024-02-01T10:15:00.000Z",
       "updatedAt": "2024-02-01T10:15:00.000Z"
-    },
-    {
-      "id": "3",
-      "title": "Rediseño del Sitio Corporativo",
-      "description": "Actualización completa del sitio web corporativo con nuevo diseño, optimización SEO y sistema de blog.",
-      "status": "completado",
-      "priority": "baja",
-      "startDate": "2023-11-01",
-      "endDate": "2024-01-10",
-      "createdBy": "1",
-      "assignedUsers": ["3"],
-      "progress": 100,
-      "budget": 8000,
-      "category": "diseño_web",
-      "createdAt": "2023-11-01T08:00:00.000Z",
-      "updatedAt": "2024-01-10T16:45:00.000Z"
     }
   ],
   "tasks": [
     {
       "id": "1",
-      "projectId": "1",
+      "projectId": null,
       "title": "Análisis de Requerimientos",
       "description": "Reunir y documentar todos los requerimientos funcionales y no funcionales del sistema.",
       "status": "completada",
@@ -91,7 +61,10 @@
       "dueDate": "2024-01-25",
       "estimatedHours": 16,
       "actualHours": 18,
-      "tags": ["analisis", "documentacion"],
+      "tags": [
+        "analisis",
+        "documentacion"
+      ],
       "comments": [
         {
           "id": "1",
@@ -105,7 +78,7 @@
     },
     {
       "id": "2",
-      "projectId": "1",
+      "projectId": null,
       "title": "Diseño de Base de Datos",
       "description": "Crear el modelo entidad-relación y diseñar la estructura de la base de datos.",
       "status": "completada",
@@ -115,14 +88,17 @@
       "dueDate": "2024-02-05",
       "estimatedHours": 12,
       "actualHours": 10,
-      "tags": ["database", "modelado"],
+      "tags": [
+        "database",
+        "modelado"
+      ],
       "comments": [],
       "createdAt": "2024-01-26T10:00:00.000Z",
       "updatedAt": "2024-02-05T09:15:00.000Z"
     },
     {
       "id": "3",
-      "projectId": "1",
+      "projectId": null,
       "title": "Desarrollo del Backend API",
       "description": "Implementar la API REST para gestión de productos, categorías y proveedores.",
       "status": "en_progreso",
@@ -132,7 +108,11 @@
       "dueDate": "2024-02-20",
       "estimatedHours": 40,
       "actualHours": 28,
-      "tags": ["backend", "api", "nodejs"],
+      "tags": [
+        "backend",
+        "api",
+        "nodejs"
+      ],
       "comments": [
         {
           "id": "2",
@@ -146,7 +126,7 @@
     },
     {
       "id": "4",
-      "projectId": "1",
+      "projectId": null,
       "title": "Interfaz de Usuario - Módulo Productos",
       "description": "Desarrollar las pantallas para crear, editar, listar y eliminar productos del inventario.",
       "status": "pendiente",
@@ -156,7 +136,11 @@
       "dueDate": "2024-03-01",
       "estimatedHours": 24,
       "actualHours": 0,
-      "tags": ["frontend", "react", "productos"],
+      "tags": [
+        "frontend",
+        "react",
+        "productos"
+      ],
       "comments": [],
       "createdAt": "2024-02-10T13:15:00.000Z",
       "updatedAt": "2024-02-10T13:15:00.000Z"
@@ -166,17 +150,23 @@
       "projectId": "2",
       "title": "Investigación de Tecnologías Móviles",
       "description": "Evaluar React Native vs Flutter para el desarrollo de la aplicación móvil.",
-      "status": "pendiente",
+      "status": "completada",
       "priority": "alta",
       "assignedTo": "2",
       "createdBy": "1",
       "dueDate": "2024-03-10",
       "estimatedHours": 8,
       "actualHours": 0,
-      "tags": ["investigacion", "mobile", "tecnologia"],
+      "tags": [
+        "investigacion",
+        "mobile",
+        "tecnologia"
+      ],
       "comments": [],
       "createdAt": "2024-02-01T11:00:00.000Z",
-      "updatedAt": "2024-02-01T11:00:00.000Z"
+      "updatedAt": "2025-09-19T03:53:10.597Z",
+      "progress": 100,
+      "completedAt": "2025-09-19T03:53:10.597Z"
     }
   ],
   "notifications": [

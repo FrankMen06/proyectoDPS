@@ -69,7 +69,7 @@ export default function RegisterPage() {
                         width="70"
                     />
                     <h4 className="fw-bold">Registro</h4>
-                    <p className="text-muted">Crea tu cuenta de usuario</p>
+                    <p className="text-secondary fw-normal">Crea tu cuenta de usuario</p>
                 </div>
 
                 {error && <div className="alert alert-danger py-2">{error}</div>}

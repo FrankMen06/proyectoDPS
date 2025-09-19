@@ -1,52 +1,67 @@
-// src/hooks/useAuth.js
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { authService } from '../services/auth.service';
+'use client';
 
+import { useState, useEffect, createContext, useContext } from 'react';
+import { useRouter } from 'next/navigation';
+
+// Crear contexto de autenticación
+const AuthContext = createContext({});
+
+// Hook para usar el contexto de autenticación
 export const useAuth = () => {
+    const context = useContext(AuthContext);
+    if (!context) {
+        throw new Error('useAuth debe ser usado dentro de AuthProvider');
+    }
+    return context;
+};
+
+// Proveedor de autenticación
+export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [session, setSession] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [loading, setLoading] = useState(true);
     const router = useRouter();
 
     useEffect(() => {
-        checkAuth();
+        checkAuthStatus();
     }, []);
 
-    const checkAuth = async () => {
+    const checkAuthStatus = () => {
         try {
-            const currentUser = authService.getCurrentUser();
+            const userData = localStorage.getItem('user');
+            const sessionData = localStorage.getItem('session');
+            const authStatus = localStorage.getItem('isAuthenticated');
 
-            if (currentUser) {
-                // Validar sesión con el servidor
-                try {
-                    const { user: validUser } = await authService.validateSession(currentUser.session.token);
-                    setUser(validUser);
+            if (userData && sessionData && authStatus === 'true') {
+                const parsedUser = JSON.parse(userData);
+                const parsedSession = JSON.parse(sessionData);
+
+                // Verificar si la sesión no ha expirado
+                const now = new Date();
+                const expiresAt = new Date(parsedSession.expiresAt);
+
+                if (now < expiresAt && parsedSession.isActive) {
+                    setUser(parsedUser);
+                    setSession(parsedSession);
                     setIsAuthenticated(true);
-                } catch (error) {
-                    // Sesión inválida
+                } else {
+                    // Sesión expirada
                     logout();
                 }
-            } else {
-                setUser(null);
-                setIsAuthenticated(false);
             }
         } catch (error) {
-            console.error('Error checking auth:', error);
-            setUser(null);
-            setIsAuthenticated(false);
+            console.error('Error al verificar autenticación:', error);
+            logout();
         } finally {
             setLoading(false);
         }
     };
 
-    const login = async (email, password) => {
+    const login = (userData, sessionData) => {
         try {
-            const { user: loggedUser, session } = await authService.login(email, password);
-
-            // Guardar en localStorage
-            localStorage.setItem('user', JSON.stringify(loggedUser));
-            localStorage.setItem('session', JSON.stringify(session));
+            localStorage.setItem('user', JSON.stringify(userData));
+            localStorage.setItem('session', JSON.stringify(sessionData));
             localStorage.setItem('isAuthenticated', 'true');
 
             setUser(loggedUser);
