@@ -103,7 +103,16 @@ export const AuthProvider = ({ children }) => {
 
     // Verificar si el usuario tiene un rol específico
     const hasRole = (role) => {
-        return user && user.role === role;
+        // Si el usuario no está cargado aún, evitar la redirección inmediata
+        // Esto previene redirecciones falsas durante la carga inicial
+        if (!user) {
+            console.log('hasRole: usuario no disponible aún');
+            // Retornar null en lugar de false para indicar "aún no se sabe"
+            return null;
+        }
+        
+        console.log('hasRole comprobando:', user.role, '===', role, ':', user.role === role);
+        return user.role === role;
     };
 
     // Verificar si el usuario tiene permisos para una acción

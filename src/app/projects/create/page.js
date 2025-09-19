@@ -10,16 +10,30 @@ export default function CreateProject() {
     const [error, setError] = useState('');
 
     useEffect(() => {
-        // Verificar permisos
-        if (!hasRole('gerente')) {
+        // No hacer nada si el usuario aún no está cargado
+        if (!user) {
+            console.log('Usuario aún no cargado, esperando...');
+            return;
+        }
+
+        // Verificar permisos sólo cuando el usuario esté disponible
+        console.log('Usuario actual:', user);
+        
+        const hasRoleResult = hasRole('gerente');
+        console.log('¿Tiene rol gerente?:', hasRoleResult);
+        
+        // Solo redirigir si explícitamente no tiene el rol (false), no si aún no se sabe (null)
+        if (hasRoleResult === false) {
+            console.log('No tiene rol gerente, redirigiendo...');
             window.location.href = '/dashboard';
             return;
         }
-    }, []);
+    }, [user, hasRole]);
 
-    const handleSave = async (projectData) => {
+    const handleSave = async (createdProject) => {
         try {
-            const createdProject = await projectService.createProject(projectData);
+            // El proyecto ya está creado por ProjectForm, solo redirigimos
+            console.log('Proyecto creado:', createdProject);
             window.location.href = `/projects/${createdProject.id}`;
         } catch (err) {
             setError('Error al crear el proyecto: ' + err.message);

@@ -13,8 +13,21 @@ export default function EditProject({ params }) {
     const [error, setError] = useState('');
 
     useEffect(() => {
-        // Verificar permisos
-        if (!hasRole('gerente')) {
+        // No hacer nada si el usuario aún no está cargado
+        if (!user) {
+            console.log('Usuario aún no cargado, esperando...');
+            return;
+        }
+
+        // Verificar permisos sólo cuando el usuario esté disponible
+        console.log('Usuario actual:', user);
+        
+        const hasRoleResult = hasRole('gerente');
+        console.log('¿Tiene rol gerente?:', hasRoleResult);
+        
+        // Solo redirigir si explícitamente no tiene el rol (false), no si aún no se sabe (null)
+        if (hasRoleResult === false) {
+            console.log('No tiene rol gerente, redirigiendo...');
             window.location.href = '/dashboard';
             return;
         }
@@ -22,7 +35,7 @@ export default function EditProject({ params }) {
         if (resolvedParams?.id) {
             loadProject();
         }
-    }, [resolvedParams?.id]);
+    }, [user, hasRole, resolvedParams?.id]);
 
     const loadProject = async () => {
         try {

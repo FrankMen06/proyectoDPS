@@ -7,7 +7,8 @@
       "password": "123456",
       "role": "gerente",
       "avatar": "https://ui-avatars.com/api/?name=Juan+Perez&background=0d8abc&color=fff",
-      "createdAt": "2024-01-15T10:00:00.000Z"
+      "createdAt": "2024-01-15T10:00:00.000Z",
+      "lastLogin": "2025-09-19T15:10:43.948Z"
     },
     {
       "id": "2",
@@ -30,145 +31,64 @@
   ],
   "projects": [
     {
-      "id": "2",
-      "title": "App Móvil de Delivery",
-      "description": "Aplicación móvil para servicio de delivery con geolocalización, pagos en línea y tracking en tiempo real.",
-      "status": "planificado",
-      "priority": "media",
-      "startDate": "2024-03-01",
-      "endDate": "2024-06-30",
-      "createdBy": "1",
-      "assignedUsers": [
-        "2"
-      ],
-      "progress": 10,
-      "budget": 25000,
-      "category": "desarrollo_movil",
-      "createdAt": "2024-02-01T10:15:00.000Z",
-      "updatedAt": "2024-02-01T10:15:00.000Z"
-    }
-  ],
-  "tasks": [
-    {
-      "id": "1",
-      "projectId": null,
-      "title": "Análisis de Requerimientos",
-      "description": "Reunir y documentar todos los requerimientos funcionales y no funcionales del sistema.",
-      "status": "completada",
-      "priority": "alta",
-      "assignedTo": "2",
-      "createdBy": "1",
-      "dueDate": "2024-01-25",
-      "estimatedHours": 16,
-      "actualHours": 18,
-      "tags": [
-        "analisis",
-        "documentacion"
-      ],
-      "comments": [
-        {
-          "id": "1",
-          "userId": "2",
-          "comment": "Requerimientos documentados y aprobados por el cliente.",
-          "createdAt": "2024-01-25T11:30:00.000Z"
-        }
-      ],
-      "createdAt": "2024-01-20T09:30:00.000Z",
-      "updatedAt": "2024-01-25T11:30:00.000Z"
-    },
-    {
-      "id": "2",
-      "projectId": null,
-      "title": "Diseño de Base de Datos",
-      "description": "Crear el modelo entidad-relación y diseñar la estructura de la base de datos.",
-      "status": "completada",
-      "priority": "alta",
-      "assignedTo": "3",
-      "createdBy": "1",
-      "dueDate": "2024-02-05",
-      "estimatedHours": 12,
-      "actualHours": 10,
-      "tags": [
-        "database",
-        "modelado"
-      ],
-      "comments": [],
-      "createdAt": "2024-01-26T10:00:00.000Z",
-      "updatedAt": "2024-02-05T09:15:00.000Z"
-    },
-    {
-      "id": "3",
-      "projectId": null,
-      "title": "Desarrollo del Backend API",
-      "description": "Implementar la API REST para gestión de productos, categorías y proveedores.",
+      "title": "Aplicacion Movil",
+      "description": "Prueba de creacion de aplicacion movil",
       "status": "en_progreso",
-      "priority": "alta",
-      "assignedTo": "2",
-      "createdBy": "1",
-      "dueDate": "2024-02-20",
-      "estimatedHours": 40,
-      "actualHours": 28,
-      "tags": [
-        "backend",
-        "api",
-        "nodejs"
-      ],
-      "comments": [
-        {
-          "id": "2",
-          "userId": "1",
-          "comment": "Revisar la documentación de la API antes de continuar.",
-          "createdAt": "2024-02-15T14:20:00.000Z"
-        }
-      ],
-      "createdAt": "2024-02-06T11:00:00.000Z",
-      "updatedAt": "2024-02-15T16:45:00.000Z"
-    },
-    {
-      "id": "4",
-      "projectId": null,
-      "title": "Interfaz de Usuario - Módulo Productos",
-      "description": "Desarrollar las pantallas para crear, editar, listar y eliminar productos del inventario.",
-      "status": "pendiente",
       "priority": "media",
-      "assignedTo": "3",
-      "createdBy": "1",
-      "dueDate": "2024-03-01",
-      "estimatedHours": 24,
-      "actualHours": 0,
-      "tags": [
-        "frontend",
-        "react",
-        "productos"
+      "startDate": "2025-09-01",
+      "endDate": "2025-09-30",
+      "budget": 1500,
+      "category": "desarrollo_web",
+      "assignedUsers": [
+        "2",
+        "3"
       ],
-      "comments": [],
-      "createdAt": "2024-02-10T13:15:00.000Z",
-      "updatedAt": "2024-02-10T13:15:00.000Z"
+      "createdBy": "1",
+      "id": "1758295261871",
+      "createdAt": "2025-09-19T15:21:01.871Z",
+      "updatedAt": "2025-09-19T15:21:56.495Z",
+      "progress": 0
     },
     {
-      "id": "5",
-      "projectId": "2",
-      "title": "Investigación de Tecnologías Móviles",
-      "description": "Evaluar React Native vs Flutter para el desarrollo de la aplicación móvil.",
-      "status": "completada",
-      "priority": "alta",
-      "assignedTo": "2",
-      "createdBy": "1",
-      "dueDate": "2024-03-10",
-      "estimatedHours": 8,
-      "actualHours": 0,
-      "tags": [
-        "investigacion",
-        "mobile",
-        "tecnologia"
+      "title": "Aplicacion Movil",
+      "description": "Prueba de creacion de aplicacion movil",
+      "status": "planificacion",
+      "priority": "media",
+      "startDate": "2025-09-01",
+      "endDate": "2025-09-30",
+      "budget": 1500,
+      "category": "desarrollo_web",
+      "assignedUsers": [
+        "2",
+        "3"
       ],
-      "comments": [],
-      "createdAt": "2024-02-01T11:00:00.000Z",
-      "updatedAt": "2025-09-19T03:53:10.597Z",
-      "progress": 100,
-      "completedAt": "2025-09-19T03:53:10.597Z"
+      "createdBy": "1",
+      "id": "1758295261920",
+      "createdAt": "2025-09-19T15:21:01.920Z",
+      "updatedAt": "2025-09-19T15:21:01.920Z",
+      "progress": 0
+    },
+    {
+      "title": "proyecto prueba dos",
+      "description": "pruebas de creacion, esperando a que ya no me duplique",
+      "status": "planificacion",
+      "priority": "media",
+      "startDate": "2025-09-01",
+      "endDate": "2025-10-01",
+      "budget": 2500,
+      "category": "desarrollo_web",
+      "assignedUsers": [
+        "2",
+        "3"
+      ],
+      "createdBy": "1",
+      "id": "1758295507598",
+      "createdAt": "2025-09-19T15:25:07.598Z",
+      "updatedAt": "2025-09-19T15:25:07.598Z",
+      "progress": 0
     }
   ],
+  "tasks": [],
   "notifications": [
     {
       "id": "1",
@@ -201,6 +121,15 @@
       "isActive": true,
       "createdAt": "2024-02-20T08:00:00.000Z",
       "expiresAt": "2024-02-27T08:00:00.000Z"
+    },
+    {
+      "id": "1758294643877",
+      "userId": "1",
+      "token": "jwt_token_1_1758294643877",
+      "isActive": true,
+      "createdAt": "2025-09-19T15:10:43.877Z",
+      "expiresAt": "2025-09-26T15:10:43.877Z",
+      "lastActivity": "2025-09-19T15:10:43.877Z"
     }
   ]
 }
