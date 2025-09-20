@@ -81,15 +81,21 @@ export default function CreateProject() {
             </nav>
 
             <div className="container mt-4">
-            <nav aria-label="breadcrumb">
-                <ol className="breadcrumb">
+            <nav aria-label="breadcrumb" className="mb-3">
+                <ol className="breadcrumb bg-white p-3 rounded shadow-sm">
                     <li className="breadcrumb-item">
-                        <a href="/dashboard">Dashboard</a>
+                        <a href="/dashboard" className="text-primary text-decoration-none fw-medium">
+                            <i className="bi bi-house me-1"></i>
+                            Dashboard
+                        </a>
                     </li>
                     <li className="breadcrumb-item">
-                        <a href="/dashboard">Proyectos</a>
+                        <a href="/dashboard" className="text-primary text-decoration-none fw-medium">
+                            <i className="bi bi-folder me-1"></i>
+                            Proyectos
+                        </a>
                     </li>
-                    <li className="breadcrumb-item active" aria-current="page">
+                    <li className="breadcrumb-item active text-dark fw-bold" aria-current="page">
                         Nuevo Proyecto
                     </li>
                 </ol>
@@ -103,7 +109,7 @@ export default function CreateProject() {
 
             <div className="row">
                 <div className="col-md-8">
-                    <h1 className="h2 mb-4">Nuevo Proyecto</h1>
+                   
                     <ProjectForm 
                         onSave={handleSave}
                         onCancel={() => window.location.href = '/dashboard'}

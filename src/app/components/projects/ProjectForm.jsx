@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { projectService, userService } from '../../services/project.service';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 export default function ProjectForm({ projectId = null, onSave, onCancel }) {
     const [formData, setFormData] = useState({
@@ -267,13 +269,13 @@ export default function ProjectForm({ projectId = null, onSave, onCancel }) {
                                         <label htmlFor="startDate" className="form-label">
                                             Fecha de Inicio *
                                         </label>
-                                        <input
-                                            type="date"
+                                        <DatePicker
+                                            selected={formData.startDate ? new Date(formData.startDate) : null}
+                                            onChange={(date) => handleChange({ target: { name: 'startDate', value: date.toISOString().split('T')[0] } })}
                                             className={`form-control ${errors.startDate ? 'is-invalid' : ''}`}
-                                            id="startDate"
-                                            name="startDate"
-                                            value={formData.startDate}
-                                            onChange={handleChange}
+                                            dateFormat="yyyy-MM-dd"
+                                            placeholderText="yyyy-MM-dd"
+                                            showPopperArrow={false} // Deshabilitar entrada manual
                                         />
                                         {errors.startDate && (
                                             <div className="invalid-feedback">{errors.startDate}</div>
@@ -284,13 +286,13 @@ export default function ProjectForm({ projectId = null, onSave, onCancel }) {
                                         <label htmlFor="endDate" className="form-label">
                                             Fecha de Fin *
                                         </label>
-                                        <input
-                                            type="date"
+                                        <DatePicker
+                                            selected={formData.endDate ? new Date(formData.endDate) : null}
+                                            onChange={(date) => handleChange({ target: { name: 'endDate', value: date.toISOString().split('T')[0] } })}
                                             className={`form-control ${errors.endDate ? 'is-invalid' : ''}`}
-                                            id="endDate"
-                                            name="endDate"
-                                            value={formData.endDate}
-                                            onChange={handleChange}
+                                            dateFormat="yyyy-MM-dd"
+                                            placeholderText="yyyy-MM-dd"
+                                            showPopperArrow={false} // Deshabilitar entrada manual
                                         />
                                         {errors.endDate && (
                                             <div className="invalid-feedback">{errors.endDate}</div>

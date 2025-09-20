@@ -31,7 +31,7 @@
   ],
   "projects": [
     {
-      "title": "Aplicacion Movil",
+      "title": "Aplicacion Movilssss",
       "description": "Prueba de creacion de aplicacion movil",
       "status": "en_progreso",
       "priority": "media",
@@ -46,7 +46,7 @@
       "createdBy": "1",
       "id": "1758295261871",
       "createdAt": "2025-09-19T15:21:01.871Z",
-      "updatedAt": "2025-09-19T15:21:56.495Z",
+      "updatedAt": "2025-09-20T02:47:04.251Z",
       "progress": 0
     },
     {
@@ -86,9 +86,73 @@
       "createdAt": "2025-09-19T15:25:07.598Z",
       "updatedAt": "2025-09-19T15:25:07.598Z",
       "progress": 0
+    },
+    {
+      "title": "wqwqw",
+      "description": "wqwqw",
+      "status": "planificacion",
+      "priority": "baja",
+      "startDate": "2025-12-12",
+      "endDate": "2025-12-13",
+      "budget": 222,
+      "category": "otros",
+      "assignedUsers": [
+        "2"
+      ],
+      "createdBy": "1",
+      "id": "1758335114904",
+      "createdAt": "2025-09-20T02:25:14.904Z",
+      "updatedAt": "2025-09-20T02:25:14.904Z",
+      "progress": 0
     }
   ],
-  "tasks": [],
+  "tasks": [
+    {
+      "title": "dsdsd",
+      "description": "dsdsdsd",
+      "projectId": "1758295261871",
+      "assignedTo": "2",
+      "priority": "alta",
+      "status": "asignada",
+      "startDate": "2025-02-11",
+      "dueDate": "2025-02-12",
+      "estimatedHours": 2,
+      "progress": 0,
+      "id": "1758338103367",
+      "createdAt": "2025-09-20T03:15:03.367Z",
+      "updatedAt": "2025-09-20T03:15:03.367Z"
+    },
+    {
+      "title": "pruebssasa",
+      "description": "asasasasas",
+      "projectId": "1758295261871",
+      "assignedTo": "3",
+      "priority": "media",
+      "status": "pendiente",
+      "startDate": "2005-12-12",
+      "dueDate": "2025-12-13",
+      "estimatedHours": 6,
+      "progress": 0,
+      "id": "1758338710931",
+      "createdAt": "2025-09-20T03:25:10.931Z",
+      "updatedAt": "2025-09-20T03:25:10.931Z"
+    },
+    {
+      "title": "pruebssasa",
+      "description": "asasasasas",
+      "projectId": "1758295261871",
+      "assignedTo": "3",
+      "priority": "media",
+      "status": "pendiente",
+      "startDate": "2005-12-12",
+      "dueDate": "2025-12-13",
+      "estimatedHours": 6,
+      "progress": 0,
+      "id": "1758338710964",
+      "createdAt": "2025-09-20T03:25:10.964Z",
+      "updatedAt": "2025-09-20T03:25:10.964Z"
+    }
+  ],
   "notifications": [
     {
       "id": "1",

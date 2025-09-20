@@ -129,12 +129,20 @@ export default function ProjectList({ userRole, userId }) {
                 </div>
                 <div className="col-md-6 text-end">
                     {userRole === 'gerente' && (
-                        <button 
-                            className="btn btn-primary"
-                            onClick={() => window.location.href = '/projects/create'}
-                        >
-                            <i className="bi bi-plus-lg"></i> Nuevo Proyecto
-                        </button>
+                        <>
+                            <button 
+                                className="btn btn-primary me-2"
+                                onClick={() => window.location.href = '/projects/create'}
+                            >
+                                <i className="bi bi-plus-lg"></i> Nuevo Proyecto
+                            </button>
+                            <button 
+                                className="btn btn-secondary"
+                                onClick={() => window.location.href = '/tasks/create'}
+                            >
+                                <i className="bi bi-plus-lg"></i> Crear Tarea
+                            </button>
+                        </>
                     )}
                 </div>
             </div>
