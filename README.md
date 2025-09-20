@@ -1,4 +1,4 @@
-# Hola Bienvendido!, aquí encunetras uno par de pasos para ocupar este proyecto 
+# Hola Bienvendido!, aquí encontraras algunos pasos para ocupar este proyecto 
 ## Para levantar el Proyecto
 
 Para levantar el proyecto
