@@ -174,11 +174,11 @@ export default function EditProject({ params }) {
 
             <div className="row">
                 <div className="col-md-8">
-                    <h1 className="h2 mb-4">Editar Proyecto</h1>
+                    
                     <ProjectForm 
-                        project={project}
-                        onSave={handleSave}
-                        onCancel={() => window.location.href = `/projects/${project.id}`}
+                        projectId={resolvedParams.id} 
+                        onSave={handleSave} 
+                        onCancel={() => window.location.href = `/projects/${project.id}`} 
                     />
                 </div>
                 <div className="col-md-4">

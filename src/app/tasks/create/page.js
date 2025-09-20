@@ -4,18 +4,26 @@ import { useState, useEffect } from 'react';
 import { taskService } from '../../services/task.service';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import TaskForm from '../../components/tasks/TaskForm';
+import { useSearchParams } from 'next/navigation';
 
 export default function CreateTask() {
     const { user, hasRole } = useAuthContext();
     const [error, setError] = useState('');
+    const searchParams = useSearchParams();
+    const projectId = searchParams.get('projectId');
 
     useEffect(() => {
-        // Verificar permisos
-        if (!hasRole('gerente')) {
+        // Verificar permisos solo cuando el usuario esté cargado
+        if (user && !hasRole('gerente')) {
             window.location.href = '/dashboard';
-            return;
         }
-    }, []);
+    }, [user]);
+
+    useEffect(() => {
+        if (projectId === null) {
+            console.log('El projectId no se especificó en la URL, se permitirá seleccionar en el formulario.');
+        }
+    }, [projectId]);
 
     const handleSave = async (taskData) => {
         try {
@@ -67,15 +75,21 @@ export default function CreateTask() {
             </nav>
 
             <div className="container mt-4">
-            <nav aria-label="breadcrumb">
-                <ol className="breadcrumb">
+            <nav aria-label="breadcrumb" className="mb-3">
+                <ol className="breadcrumb bg-white p-3 rounded shadow-sm">
                     <li className="breadcrumb-item">
-                        <a href="/dashboard">Dashboard</a>
+                        <a href="/dashboard" className="text-primary text-decoration-none fw-medium">
+                            <i className="bi bi-house me-1"></i>
+                            Dashboard
+                        </a>
                     </li>
                     <li className="breadcrumb-item">
-                        <a href="/dashboard">Tareas</a>
+                        <a href="/dashboard" className="text-primary text-decoration-none fw-medium">
+                            <i className="bi bi-list-task me-1"></i>
+                            Tareas
+                        </a>
                     </li>
-                    <li className="breadcrumb-item active" aria-current="page">
+                    <li className="breadcrumb-item active text-dark fw-bold" aria-current="page">
                         Nueva Tarea
                     </li>
                 </ol>
@@ -89,10 +103,10 @@ export default function CreateTask() {
 
             <div className="row">
                 <div className="col-md-8">
-                    <h1 className="h2 mb-4">Nueva Tarea</h1>
                     <TaskForm 
                         onSave={handleSave}
                         onCancel={() => window.location.href = '/dashboard'}
+                        projectId={projectId || undefined} // Permitir que sea opcional
                     />
                 </div>
                 <div className="col-md-4">

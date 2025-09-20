@@ -211,7 +211,7 @@ export default function ProjectDetail({ params }) {
                             </li>
                         </ol>
                     </nav>
-                    <h1 className="h2">{project.title}</h1>
+                    <h1 className="h2 text-dark">{project.title}</h1>
                     <span className={getStatusBadgeClass(project.status)}>
                         {project.status.replace('_', ' ').toUpperCase()}
                     </span>

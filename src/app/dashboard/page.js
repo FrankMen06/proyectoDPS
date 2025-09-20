@@ -162,27 +162,14 @@ export default function Dashboard() {
                         </div>
                         <div className="col-auto">
                             <div className="d-flex gap-2">
-                                {user.role === 'gerente' && (
-                                    <>
-                                        {activeTab === 'projects' && (
-                                            <button 
-                                                className="btn btn-primary"
-                                                onClick={() => window.location.href = '/projects/create'}
-                                            >
-                                                <i className="bi bi-plus-lg me-1"></i>
-                                                Nuevo Proyecto
-                                            </button>
-                                        )}
-                                        {activeTab === 'tasks' && (
-                                            <button 
-                                                className="btn btn-primary"
-                                                onClick={() => window.location.href = '/tasks/create'}
-                                            >
-                                                <i className="bi bi-plus-lg me-1"></i>
-                                                Nueva Tarea
-                                            </button>
-                                        )}
-                                    </>
+                                {user.role === 'gerente' && activeTab === 'tasks' && (
+                                    <button 
+                                        className="btn btn-primary"
+                                        onClick={() => window.location.href = '/tasks/create'}
+                                    >
+                                        <i className="bi bi-plus-lg me-1"></i>
+                                        Nueva Tarea
+                                    </button>
                                 )}
                                 <button 
                                     className="btn btn-outline-secondary"

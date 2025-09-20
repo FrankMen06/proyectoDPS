@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { taskService } from '../../services/task.service';
 import { projectService, userService } from '../../services/project.service';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 export default function TaskForm({ taskId = null, projectId = null, onSave, onCancel }) {
     const [formData, setFormData] = useState({
@@ -342,13 +344,13 @@ export default function TaskForm({ taskId = null, projectId = null, onSave, onCa
                                         <label htmlFor="startDate" className="form-label">
                                             Fecha de Inicio
                                         </label>
-                                        <input
-                                            type="date"
+                                        <DatePicker
+                                            selected={formData.startDate ? new Date(formData.startDate) : null}
+                                            onChange={(date) => handleChange({ target: { name: 'startDate', value: date.toISOString().split('T')[0] } })}
                                             className="form-control"
-                                            id="startDate"
-                                            name="startDate"
-                                            value={formData.startDate}
-                                            onChange={handleChange}
+                                            dateFormat="yyyy-MM-dd"
+                                            placeholderText="yyyy-MM-dd" // Mostrar máscara de fecha
+                                            showPopperArrow={false} // Deshabilitar entrada manual
                                         />
                                     </div>
 
@@ -356,13 +358,13 @@ export default function TaskForm({ taskId = null, projectId = null, onSave, onCa
                                         <label htmlFor="dueDate" className="form-label">
                                             Fecha de Vencimiento
                                         </label>
-                                        <input
-                                            type="date"
+                                        <DatePicker
+                                            selected={formData.dueDate ? new Date(formData.dueDate) : null}
+                                            onChange={(date) => handleChange({ target: { name: 'dueDate', value: date.toISOString().split('T')[0] } })}
                                             className={`form-control ${errors.dueDate ? 'is-invalid' : ''}`}
-                                            id="dueDate"
-                                            name="dueDate"
-                                            value={formData.dueDate}
-                                            onChange={handleChange}
+                                            dateFormat="yyyy-MM-dd"
+                                            placeholderText="yyyy-MM-dd" // Mostrar máscara de fecha
+                                            showPopperArrow={false} // Deshabilitar entrada manual
                                         />
                                         {errors.dueDate && (
                                             <div className="invalid-feedback">{errors.dueDate}</div>
