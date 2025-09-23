@@ -2,6 +2,9 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from "next/link";
+
+
 
 export default function RegisterPage() {
     const router = useRouter();
@@ -38,7 +41,7 @@ export default function RegisterPage() {
                 name: formData.name,
                 email: formData.email.toLowerCase(),
                 password: formData.password,
-                role: 'usuario', // 🔒 forzado
+                role: 'usuario', 
                 avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(formData.name)}&background=random&color=fff`,
                 createdAt: new Date().toISOString()
             };
@@ -50,7 +53,7 @@ export default function RegisterPage() {
             });
 
             alert('✅ Usuario registrado con éxito. Ahora puedes iniciar sesión.');
-            router.push('/'); // vuelve al login
+            router.push('/'); 
         } catch (err) {
             setError('Error al registrar usuario');
         } finally {
@@ -132,7 +135,9 @@ export default function RegisterPage() {
                 <div className="mt-3 text-center">
                     <small className="text-muted">
                         ¿Ya tienes cuenta?{' '}
-                        <a href="/public" className="text-decoration-none">Inicia sesión aquí</a>
+                     <Link href="/" className="text-decoration-none">
+  Inicia sesión aquí
+</Link>
                     </small>
                 </div>
             </div>
