@@ -1,33 +1,34 @@
 'use client';
 
-import { useState, useEffect, use } from 'react';
+import { useState, useEffect } from 'react';
 import { taskService } from '../../../services/task.service';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import TaskForm from '../../../components/tasks/TaskForm';
 
 export default function EditTask({ params }) {
-    const resolvedParams = use(params);
     const { user, hasRole } = useAuthContext();
     const [task, setTask] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
     useEffect(() => {
-        // Verificar permisos
-        if (!hasRole('gerente')) {
+        if (!params?.id) return;
+
+       
+        if (user && !hasRole('gerente')) {
             window.location.href = '/dashboard';
             return;
         }
 
-        if (resolvedParams?.id) {
-            loadTask();
+        if (user && hasRole('gerente')) {
+            loadTask(params.id);
         }
-    }, [resolvedParams?.id]);
+    }, [params?.id, user]); 
 
-    const loadTask = async () => {
+    const loadTask = async (id) => {
         try {
             setLoading(true);
-            const taskData = await taskService.getTaskById(resolvedParams.id);
+            const taskData = await taskService.getTaskById(id);
             setTask(taskData);
         } catch (err) {
             setError('Error al cargar la tarea: ' + err.message);
@@ -38,12 +39,13 @@ export default function EditTask({ params }) {
 
     const handleSave = async (taskData) => {
         try {
-            await taskService.updateTask(resolvedParams.id, taskData);
-            window.location.href = `/tasks/${resolvedParams.id}`;
+            await taskService.updateTask(params.id, taskData);
+            window.location.href = `/tasks/${params.id}`;
         } catch (err) {
             setError('Error al actualizar la tarea: ' + err.message);
         }
     };
+
 
     if (loading) {
         return (
@@ -154,11 +156,12 @@ export default function EditTask({ params }) {
             <div className="row">
                 <div className="col-md-8">
                     <h1 className="h2 mb-4">Editar Tarea</h1>
-                    <TaskForm 
-                        task={task}
-                        onSave={handleSave}
-                        onCancel={() => window.location.href = `/tasks/${task.id}`}
-                    />
+                   <TaskForm
+    taskId={task.id}   
+    projectId={task.projectId} 
+    onSave={handleSave}
+    onCancel={() => window.location.href = `/tasks/${task.id}`}
+/>
                 </div>
                 <div className="col-md-4">
                     <div className="card">

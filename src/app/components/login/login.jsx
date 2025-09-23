@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import Link from "next/link";
 
 export default function Login() {
     const router = useRouter();
@@ -113,9 +113,11 @@ export default function Login() {
                 <div className="mt-3 text-center">
                     <small className="text-muted">
                         ¿No tienes cuenta?{' '}
-                        <Link href="../register" className="text-decoration-none">
-                            Regístrate aquí
-                        </Link>
+                       <Link href="/register" className="text-decoration-none">
+                       Regístrate aquí
+                       </Link>
+                           
+                        
                     </small>
                 </div>
             </div>
