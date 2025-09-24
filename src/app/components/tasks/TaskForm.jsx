@@ -6,7 +6,7 @@ import { projectService, userService } from '../../services/project.service';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-export default function TaskForm({ taskId = null, projectId = null, onSave, onCancel }) {
+export default function TaskForm({ task = null, taskId = null, projectId = null, onSave, onCancel }) {
     const [formData, setFormData] = useState({
         title: '',
         description: '',
@@ -27,30 +27,39 @@ export default function TaskForm({ taskId = null, projectId = null, onSave, onCa
     const [userRole, setUserRole] = useState('');
 
     useEffect(() => {
-        // Obtener rol del usuario actual
         const currentUser = JSON.parse(localStorage.getItem('user') || '{}');
         setUserRole(currentUser.role);
-        
+
         loadInitialData();
-        if (taskId) {
+
+        if (task) {
             setIsEdit(true);
-            loadTask();
+            setFormData((prev) => ({
+                ...prev,
+                ...task,
+                startDate: task.startDate || '',
+                dueDate: task.dueDate || '',
+                estimatedHours: task.estimatedHours || '',
+                progress: task.progress || 0,
+            }));
+        } else if (taskId) {
+            setIsEdit(true);
+            loadTask(taskId);
         }
-    }, [taskId, projectId]);
+    }, [task, taskId, projectId]);
 
     const loadInitialData = async () => {
         try {
             const currentUser = JSON.parse(localStorage.getItem('user') || '{}');
-            
+
             const [usersData, projectsData] = await Promise.all([
                 userService.getAllUsers(),
-                currentUser.role === 'gerente' 
+                currentUser.role === 'gerente'
                     ? projectService.getAllProjects()
                     : projectService.getProjectsByUser(currentUser.id)
             ]);
 
-            // Filtrar solo usuarios regulares para asignación
-            const regularUsers = usersData.filter(user => user.role === 'usuario');
+            const regularUsers = usersData.filter(u => u.role === 'usuario');
             setUsers(regularUsers);
             setProjects(projectsData);
         } catch (err) {
@@ -58,21 +67,21 @@ export default function TaskForm({ taskId = null, projectId = null, onSave, onCa
         }
     };
 
-    const loadTask = async () => {
+    const loadTask = async (id) => {
         try {
             setLoading(true);
-            const task = await taskService.getTaskById(taskId);
+            const taskData = await taskService.getTaskById(id);
             setFormData({
-                title: task.title || '',
-                description: task.description || '',
-                projectId: task.projectId || '',
-                assignedTo: task.assignedTo || '',
-                priority: task.priority || 'media',
-                status: task.status || 'pendiente',
-                startDate: task.startDate || '',
-                dueDate: task.dueDate || '',
-                estimatedHours: task.estimatedHours || '',
-                progress: task.progress || 0
+                title: taskData.title || '',
+                description: taskData.description || '',
+                projectId: taskData.projectId || '',
+                assignedTo: taskData.assignedTo || '',
+                priority: taskData.priority || 'media',
+                status: taskData.status || 'pendiente',
+                startDate: taskData.startDate || '',
+                dueDate: taskData.dueDate || '',
+                estimatedHours: taskData.estimatedHours || '',
+                progress: taskData.progress || 0,
             });
         } catch (err) {
             console.error('Error al cargar tarea:', err);
@@ -87,34 +96,18 @@ export default function TaskForm({ taskId = null, projectId = null, onSave, onCa
             ...prev,
             [name]: type === 'number' ? (value === '' ? '' : Number(value)) : value
         }));
-        
-        // Limpiar error del campo modificado
+
         if (errors[name]) {
-            setErrors(prev => ({
-                ...prev,
-                [name]: ''
-            }));
+            setErrors(prev => ({ ...prev, [name]: '' }));
         }
     };
 
     const validateForm = () => {
         const newErrors = {};
-
-        if (!formData.title.trim()) {
-            newErrors.title = 'El título es obligatorio';
-        }
-
-        if (!formData.description.trim()) {
-            newErrors.description = 'La descripción es obligatoria';
-        }
-
-        if (!formData.projectId) {
-            newErrors.projectId = 'Debe seleccionar un proyecto';
-        }
-
-        if (!formData.priority) {
-            newErrors.priority = 'Debe seleccionar una prioridad';
-        }
+        if (!formData.title.trim()) newErrors.title = 'El título es obligatorio';
+        if (!formData.description.trim()) newErrors.description = 'La descripción es obligatoria';
+        if (!formData.projectId) newErrors.projectId = 'Debe seleccionar un proyecto';
+        if (!formData.priority) newErrors.priority = 'Debe seleccionar una prioridad';
 
         if (formData.startDate && formData.dueDate) {
             const startDate = new Date(formData.startDate);
@@ -138,32 +131,28 @@ export default function TaskForm({ taskId = null, projectId = null, onSave, onCa
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        if (!validateForm()) {
-            return;
-        }
+
+        if (!validateForm()) return;
 
         try {
             setLoading(true);
-            
+
             const taskData = {
                 ...formData,
                 estimatedHours: formData.estimatedHours ? parseFloat(formData.estimatedHours) : null,
                 progress: parseInt(formData.progress) || 0,
-                // Si el progreso es 100%, marcar como completada
                 status: formData.progress >= 100 ? 'completada' : formData.status
             };
 
             let savedTask;
             if (isEdit) {
-                savedTask = await taskService.updateTask(taskId, taskData);
+                const idToUpdate = taskId || task?.id;
+                savedTask = await taskService.updateTask(idToUpdate, taskData);
             } else {
                 savedTask = await taskService.createTask(taskData);
             }
 
-            if (onSave) {
-                onSave(savedTask);
-            }
+            if (onSave) onSave(savedTask);
         } catch (err) {
             setErrors({ submit: 'Error al guardar tarea: ' + err.message });
         } finally {
@@ -173,10 +162,8 @@ export default function TaskForm({ taskId = null, projectId = null, onSave, onCa
 
     const getProjectUsers = () => {
         if (!formData.projectId) return users;
-        
         const selectedProject = projects.find(p => p.id === formData.projectId);
         if (!selectedProject || !selectedProject.assignedUsers) return users;
-        
         return users.filter(user => selectedProject.assignedUsers.includes(user.id));
     };
 
@@ -192,7 +179,8 @@ export default function TaskForm({ taskId = null, projectId = null, onSave, onCa
 
     return (
         <div className="container">
-            <div className="row justify-content-center">
+
+               <div className="row justify-content-center">
                 <div className="col-lg-8">
                     <div className="card">
                         <div className="card-header">
@@ -436,36 +424,35 @@ export default function TaskForm({ taskId = null, projectId = null, onSave, onCa
                                     </div>
                                 )}
 
-                                {/* Botones */}
-                                <div className="d-flex justify-content-end gap-2">
-                                    <button
-                                        type="button"
-                                        className="btn btn-secondary"
-                                        onClick={onCancel}
-                                        disabled={loading}
-                                    >
-                                        Cancelar
-                                    </button>
-                                    <button
-                                        type="submit"
-                                        className="btn btn-primary"
-                                        disabled={loading}
-                                    >
-                                        {loading ? (
-                                            <>
-                                                <span className="spinner-border spinner-border-sm me-2" role="status"></span>
-                                                Guardando...
-                                            </>
-                                        ) : (
-                                            isEdit ? 'Actualizar Tarea' : 'Crear Tarea'
-                                        )}
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+            <div className="d-flex justify-content-end gap-2">
+                <button
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={onCancel}
+                    disabled={loading}
+                >
+                    Cancelar
+                </button>
+                <button
+                    type="submit"
+                    className="btn btn-primary"
+                    disabled={loading}
+                >
+                    {loading ? (
+                        <>
+                            <span className="spinner-border spinner-border-sm me-2" role="status"></span>
+                            Guardando...
+                        </>
+                    ) : (
+                        isEdit ? 'Actualizar Tarea' : 'Crear Tarea'
+                    )}
+                </button>
             </div>
+            </form>
+        </div>
+        </div>
+        </div>
+        </div>
         </div>
     );
 }
