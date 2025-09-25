@@ -31,7 +31,7 @@
   ],
   "projects": [
     {
-      "title": "Aplicacion Movilssss",
+      "title": "Aplicacion Movil",
       "description": "Prueba de creacion de aplicacion movil",
       "status": "en_progreso",
       "priority": "media",
@@ -46,30 +46,11 @@
       "createdBy": "1",
       "id": "1758295261871",
       "createdAt": "2025-09-19T15:21:01.871Z",
-      "updatedAt": "2025-09-20T02:47:04.251Z",
+      "updatedAt": "2025-09-25T02:52:47.653Z",
       "progress": 0
     },
     {
-      "title": "Aplicacion Movil",
-      "description": "Prueba de creacion de aplicacion movil",
-      "status": "planificacion",
-      "priority": "media",
-      "startDate": "2025-09-01",
-      "endDate": "2025-09-30",
-      "budget": 1500,
-      "category": "desarrollo_web",
-      "assignedUsers": [
-        "2",
-        "3"
-      ],
-      "createdBy": "1",
-      "id": "1758295261920",
-      "createdAt": "2025-09-19T15:21:01.920Z",
-      "updatedAt": "2025-09-19T15:21:01.920Z",
-      "progress": 0
-    },
-    {
-      "title": "proyecto prueba dos",
+      "title": "proyecto prueba",
       "description": "pruebas de creacion, esperando a que ya no me duplique",
       "status": "planificacion",
       "priority": "media",
@@ -84,47 +65,29 @@
       "createdBy": "1",
       "id": "1758295507598",
       "createdAt": "2025-09-19T15:25:07.598Z",
-      "updatedAt": "2025-09-19T15:25:07.598Z",
-      "progress": 0
-    },
-    {
-      "title": "wqwqw",
-      "description": "wqwqw",
-      "status": "planificacion",
-      "priority": "baja",
-      "startDate": "2025-12-12",
-      "endDate": "2025-12-13",
-      "budget": 222,
-      "category": "otros",
-      "assignedUsers": [
-        "2"
-      ],
-      "createdBy": "1",
-      "id": "1758335114904",
-      "createdAt": "2025-09-20T02:25:14.904Z",
-      "updatedAt": "2025-09-20T02:25:14.904Z",
+      "updatedAt": "2025-09-25T02:52:35.972Z",
       "progress": 0
     }
   ],
   "tasks": [
     {
-      "title": "Flores Crack",
-      "description": "dsdsdsd",
+      "title": "Hacer esquema",
+      "description": "test",
       "projectId": "1758295261871",
       "assignedTo": "2",
       "priority": "alta",
-      "status": "asignada",
+      "status": "en_progreso",
       "startDate": "2025-02-11",
       "dueDate": "2025-02-12",
       "estimatedHours": 2,
       "progress": 0,
       "id": "1758338103367",
       "createdAt": "2025-09-20T03:15:03.367Z",
-      "updatedAt": "2025-09-23T04:50:16.926Z"
+      "updatedAt": "2025-09-25T02:53:50.908Z"
     },
     {
-      "title": "pruebssasa",
-      "description": "asasasasas",
+      "title": "Prueba 1",
+      "description": "prueba",
       "projectId": "1758295261871",
       "assignedTo": "3",
       "priority": "media",
@@ -135,22 +98,7 @@
       "progress": 0,
       "id": "1758338710931",
       "createdAt": "2025-09-20T03:25:10.931Z",
-      "updatedAt": "2025-09-20T03:25:10.931Z"
-    },
-    {
-      "title": "pruebssasa",
-      "description": "asasasasas",
-      "projectId": "1758295261871",
-      "assignedTo": "3",
-      "priority": "media",
-      "status": "pendiente",
-      "startDate": "2005-12-12",
-      "dueDate": "2025-12-13",
-      "estimatedHours": 6,
-      "progress": 0,
-      "id": "1758338710964",
-      "createdAt": "2025-09-20T03:25:10.964Z",
-      "updatedAt": "2025-09-20T03:25:10.964Z"
+      "updatedAt": "2025-09-25T02:53:15.767Z"
     }
   ],
   "notifications": [

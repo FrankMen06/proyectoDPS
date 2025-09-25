@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import { taskService } from '../../../services/task.service';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import TaskForm from '../../../components/tasks/TaskForm';
@@ -11,19 +11,21 @@ export default function EditTask({ params }) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
-    useEffect(() => {
-        if (!params?.id) return;
+    // Unwrap params using React.use()
+    const resolvedParams = use(params);
 
-       
+    useEffect(() => {
+        if (!resolvedParams?.id) return;
+
         if (user && !hasRole('gerente')) {
             window.location.href = '/dashboard';
             return;
         }
 
         if (user && hasRole('gerente')) {
-            loadTask(params.id);
+            loadTask(resolvedParams.id);
         }
-    }, [params?.id, user]); 
+    }, [resolvedParams?.id, user]);
 
     const loadTask = async (id) => {
         try {
@@ -137,17 +139,23 @@ export default function EditTask({ params }) {
 
             <div className="container mt-4">
             <nav aria-label="breadcrumb">
-                <ol className="breadcrumb">
+                <ol className="breadcrumb px-3 py-2 bg-white rounded shadow-sm mb-4" style={{ border: '1px solid #eee', fontSize: '1.1rem' }}>
                     <li className="breadcrumb-item">
-                        <a href="/dashboard">Dashboard</a>
+                        <a href="/dashboard" style={{ color: '#0d6efd', fontWeight: '500', textDecoration: 'none' }}>
+                            <i className="bi bi-house-door me-1"></i> Dashboard
+                        </a>
                     </li>
                     <li className="breadcrumb-item">
-                        <a href="/dashboard">Tareas</a>
+                        <a href="/dashboard" style={{ color: '#0d6efd', fontWeight: '500', textDecoration: 'none' }}>
+                            <i className="bi bi-folder me-1"></i> Tareas
+                        </a>
                     </li>
                     <li className="breadcrumb-item">
-                        <a href={`/tasks/${task.id}`}>{task.title}</a>
+                        <a href={`/tasks/${task.id}`} style={{ color: '#212529', fontWeight: '500', textDecoration: 'none' }}>
+                            {task.title}
+                        </a>
                     </li>
-                    <li className="breadcrumb-item active" aria-current="page">
+                    <li className="breadcrumb-item active" aria-current="page" style={{ color: '#212529', fontWeight: 'bold' }}>
                         Editar
                     </li>
                 </ol>
@@ -155,7 +163,6 @@ export default function EditTask({ params }) {
 
             <div className="row">
                 <div className="col-md-8">
-                    <h1 className="h2 mb-4">Editar Tarea</h1>
                    <TaskForm
     taskId={task.id}   
     projectId={task.projectId} 

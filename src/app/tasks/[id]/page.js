@@ -243,7 +243,7 @@ export default function TaskDetail({ params }) {
                             </li>
                         </ol>
                     </nav>
-                    <h1 className="h2">{task.title}</h1>
+                    <h1 className="h2 text-dark">{task.title}</h1>
                     <div className="mb-2">
                         <span className={getStatusBadgeClass(task.status)}>
                             {task.status.replace('_', ' ').toUpperCase()}
