@@ -3,16 +3,11 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from "next/link";
-
-
+import { authService } from '@/app/services/auth.service';
 
 export default function RegisterPage() {
     const router = useRouter();
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        password: ''
-    });
+    const [formData, setFormData] = useState({ name: '', email: '', password: '' });
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
@@ -27,35 +22,12 @@ export default function RegisterPage() {
         setLoading(true);
 
         try {
-            // Verificar si ya existe un usuario con ese email
-            const res = await fetch(`http://localhost:3001/users?email=${formData.email}`);
-            const users = await res.json();
-            if (users.length > 0) {
-                setError('Este correo ya está registrado');
-                return;
-            }
-
-            // Crear nuevo usuario con rol fijo = "usuario"
-            const newUser = {
-                id: Date.now().toString(),
-                name: formData.name,
-                email: formData.email.toLowerCase(),
-                password: formData.password,
-                role: 'usuario', 
-                avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(formData.name)}&background=random&color=fff`,
-                createdAt: new Date().toISOString()
-            };
-
-            await fetch('http://localhost:3001/users', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(newUser)
-            });
+            const user = await authService.register(formData);
 
             alert('✅ Usuario registrado con éxito. Ahora puedes iniciar sesión.');
-            router.push('/'); 
+            router.push('/');
         } catch (err) {
-            setError('Error al registrar usuario');
+            setError(err.message || 'Error al registrar usuario');
         } finally {
             setLoading(false);
         }
@@ -120,14 +92,8 @@ export default function RegisterPage() {
                         />
                     </div>
 
-                    <button
-                        type="submit"
-                        disabled={loading}
-                        className="btn btn-success w-100"
-                    >
-                        {loading ? (
-                            <span className="spinner-border spinner-border-sm me-2"></span>
-                        ) : null}
+                    <button type="submit" disabled={loading} className="btn btn-success w-100">
+                        {loading ? <span className="spinner-border spinner-border-sm me-2"></span> : null}
                         {loading ? 'Registrando...' : 'Registrar'}
                     </button>
                 </form>
@@ -135,9 +101,9 @@ export default function RegisterPage() {
                 <div className="mt-3 text-center">
                     <small className="text-muted">
                         ¿Ya tienes cuenta?{' '}
-                     <Link href="/" className="text-decoration-none">
-  Inicia sesión aquí
-</Link>
+                        <Link href="/" className="text-decoration-none">
+                            Inicia sesión aquí
+                        </Link>
                     </small>
                 </div>
             </div>

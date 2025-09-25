@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from "next/link";
+import { authService } from '@/app/services/auth.service';
 
 export default function Login() {
     const router = useRouter();
@@ -21,33 +22,16 @@ export default function Login() {
         setLoading(true);
 
         try {
-            // Consumir JSON Server
-            const res = await fetch(`http://localhost:3001/users?email=${formData.email}&password=${formData.password}`);
-            const users = await res.json();
+            const { user, session } = await authService.login(formData.email, formData.password);
 
-            if (!users.length) {
-                setError('Correo o contraseña incorrectos');
-                return;
-            }
-
-            const user = users[0];
-            // Crear sesión básica
-            const session = {
-                id: Date.now().toString(),
-                userId: user.id,
-                token: `jwt_${user.id}_${Date.now()}`,
-                isActive: true,
-                createdAt: new Date().toISOString(),
-                expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString() // 7 días
-            };
-
+            // Guardar sesión
             localStorage.setItem('user', JSON.stringify(user));
             localStorage.setItem('session', JSON.stringify(session));
             localStorage.setItem('isAuthenticated', 'true');
 
             router.push('/dashboard');
         } catch (err) {
-            setError('Error en el servidor');
+            setError(err.message || 'Error en el servidor');
         } finally {
             setLoading(false);
         }
@@ -98,14 +82,8 @@ export default function Login() {
                         />
                     </div>
 
-                    <button
-                        type="submit"
-                        disabled={loading}
-                        className="btn btn-primary w-100"
-                    >
-                        {loading ? (
-                            <span className="spinner-border spinner-border-sm me-2"></span>
-                        ) : null}
+                    <button type="submit" disabled={loading} className="btn btn-primary w-100">
+                        {loading ? <span className="spinner-border spinner-border-sm me-2"></span> : null}
                         {loading ? 'Ingresando...' : 'Ingresar'}
                     </button>
                 </form>
@@ -113,11 +91,9 @@ export default function Login() {
                 <div className="mt-3 text-center">
                     <small className="text-muted">
                         ¿No tienes cuenta?{' '}
-                       <Link href="/register" className="text-decoration-none">
-                       Regístrate aquí
-                       </Link>
-                           
-                        
+                        <Link href="/register" className="text-decoration-none">
+                            Regístrate aquí
+                        </Link>
                     </small>
                 </div>
             </div>
