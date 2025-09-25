@@ -67,6 +67,24 @@
       "createdAt": "2025-09-19T15:25:07.598Z",
       "updatedAt": "2025-09-25T02:52:35.972Z",
       "progress": 0
+    },
+    {
+      "id": "1758770008204",
+      "title": "Modulo de Gestión de transportes",
+      "description": "Modulo de Gestión de transportes",
+      "status": "planificacion",
+      "priority": "alta",
+      "startDate": "2025-09-29",
+      "endDate": "2025-10-05",
+      "budget": 2222222,
+      "category": "desarrollo_web",
+      "assignedUsers": [
+        "3"
+      ],
+      "createdBy": "1",
+      "createdAt": "2025-09-25T03:13:28.204Z",
+      "updatedAt": "2025-09-25T03:13:28.204Z",
+      "progress": 0
     }
   ],
   "tasks": [
