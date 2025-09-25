@@ -1,23 +1,22 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { Suspense, useState, useEffect } from 'react';
 import { taskService } from '../../services/task.service';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import TaskForm from '../../components/tasks/TaskForm';
 import { useSearchParams } from 'next/navigation';
 
-export default function CreateTask() {
+function CreateTaskInner() {
     const { user, hasRole } = useAuthContext();
     const [error, setError] = useState('');
     const searchParams = useSearchParams();
     const projectId = searchParams.get('projectId');
 
     useEffect(() => {
-        // Verificar permisos solo cuando el usuario esté cargado
         if (user && !hasRole('gerente')) {
             window.location.href = '/dashboard';
         }
-    }, [user]);
+    }, [user, hasRole]);
 
     useEffect(() => {
         if (projectId === null) {
@@ -43,97 +42,104 @@ export default function CreateTask() {
                         <i className="bi bi-kanban me-2"></i>
                         Gestión de Proyectos
                     </a>
-                    
+
                     <div className="navbar-nav me-auto">
                         <a className="nav-link" href="/dashboard">
                             <i className="bi bi-house me-1"></i>
                             Dashboard
                         </a>
                         <span className="nav-link active">
-                            <i className="bi bi-plus-lg me-1"></i>
-                            Nueva Tarea
-                        </span>
+              <i className="bi bi-plus-lg me-1"></i>
+              Nueva Tarea
+            </span>
                     </div>
-                    
+
                     {user && (
                         <div className="navbar-nav">
-                            <span className="navbar-text">
-                                <img
-                                    src={user.avatar}
-                                    alt={user.name}
-                                    className="rounded-circle me-2"
-                                    style={{ width: '32px', height: '32px' }}
-                                />
-                                {user.name}
-                                <span className={`badge ms-2 ${user.role === 'gerente' ? 'bg-warning' : 'bg-info'}`}>
-                                    {user.role}
-                                </span>
-                            </span>
+              <span className="navbar-text">
+                <img
+                    src={user.avatar}
+                    alt={user.name}
+                    className="rounded-circle me-2"
+                    style={{ width: '32px', height: '32px' }}
+                />
+                  {user.name}
+                  <span className={`badge ms-2 ${user.role === 'gerente' ? 'bg-warning' : 'bg-info'}`}>
+                  {user.role}
+                </span>
+              </span>
                         </div>
                     )}
                 </div>
             </nav>
 
             <div className="container mt-4">
-            <nav aria-label="breadcrumb" className="mb-3">
-                <ol className="breadcrumb bg-white p-3 rounded shadow-sm">
-                    <li className="breadcrumb-item">
-                        <a href="/dashboard" className="text-primary text-decoration-none fw-medium">
-                            <i className="bi bi-house me-1"></i>
-                            Dashboard
-                        </a>
-                    </li>
-                    <li className="breadcrumb-item">
-                        <a href="/dashboard" className="text-primary text-decoration-none fw-medium">
-                            <i className="bi bi-list-task me-1"></i>
-                            Tareas
-                        </a>
-                    </li>
-                    <li className="breadcrumb-item active text-dark fw-bold" aria-current="page">
-                        Nueva Tarea
-                    </li>
-                </ol>
-            </nav>
+                <nav aria-label="breadcrumb" className="mb-3">
+                    <ol className="breadcrumb bg-white p-3 rounded shadow-sm">
+                        <li className="breadcrumb-item">
+                            <a href="/dashboard" className="text-primary text-decoration-none fw-medium">
+                                <i className="bi bi-house me-1"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li className="breadcrumb-item">
+                            <a href="/dashboard" className="text-primary text-decoration-none fw-medium">
+                                <i className="bi bi-list-task me-1"></i>
+                                Tareas
+                            </a>
+                        </li>
+                        <li className="breadcrumb-item active text-dark fw-bold" aria-current="page">
+                            Nueva Tarea
+                        </li>
+                    </ol>
+                </nav>
 
-            {error && (
-                <div className="alert alert-danger" role="alert">
-                    {error}
-                </div>
-            )}
+                {error && (
+                    <div className="alert alert-danger" role="alert">
+                        {error}
+                    </div>
+                )}
 
-            <div className="row">
-                <div className="col-md-8">
-                    <TaskForm 
-                        onSave={handleSave}
-                        onCancel={() => window.location.href = '/dashboard'}
-                        projectId={projectId || undefined} // Permitir que sea opcional
-                    />
-                </div>
-                <div className="col-md-4">
-                    <div className="card">
-                        <div className="card-header">
-                            <h5 className="card-title mb-0">Instrucciones</h5>
-                        </div>
-                        <div className="card-body">
-                            <p className="card-text">
-                                <small className="text-muted">
-                                    Completa el formulario para crear una nueva tarea. 
-                                    Asegúrate de asignar la tarea a un proyecto y usuario específico.
-                                </small>
-                            </p>
-                            <ul className="small text-muted">
-                                <li>Título: Nombre descriptivo de la tarea</li>
-                                <li>Descripción: Detalles específicos del trabajo</li>
-                                <li>Proyecto: Selecciona el proyecto asociado</li>
-                                <li>Usuario: Asigna a un miembro del equipo</li>
-                                <li>Prioridad: Define la importancia de la tarea</li>
-                                <li>Fecha límite: Establece un plazo realista</li>
-                            </ul>
+                <div className="row">
+                    <div className="col-md-8">
+                        <TaskForm
+                            onSave={handleSave}
+                            onCancel={() => (window.location.href = '/dashboard')}
+                            projectId={projectId || undefined}
+                        />
+                    </div>
+                    <div className="col-md-4">
+                        <div className="card">
+                            <div className="card-header">
+                                <h5 className="card-title mb-0">Instrucciones</h5>
+                            </div>
+                            <div className="card-body">
+                                <p className="card-text">
+                                    <small className="text-muted">
+                                        Completa el formulario para crear una nueva tarea. Asegúrate de asignar la tarea a un proyecto y usuario específico.
+                                    </small>
+                                </p>
+                                <ul className="small text-muted">
+                                    <li>Título: Nombre descriptivo de la tarea</li>
+                                    <li>Descripción: Detalles específicos del trabajo</li>
+                                    <li>Proyecto: Selecciona el proyecto asociado</li>
+                                    <li>Usuario: Asigna a un miembro del equipo</li>
+                                    <li>Prioridad: Define la importancia de la tarea</li>
+                                    <li>Fecha límite: Establece un plazo realista</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            </div>
         </div>
+    );
+}
+
+export default function CreateTaskPage() {
+    return (
+        <Suspense fallback={<div>Cargando...</div>}>
+            <CreateTaskInner />
+        </Suspense>
     );
 }
