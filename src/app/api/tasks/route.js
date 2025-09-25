@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { list, create } from '../../envs/db';
+import { list, create } from '@/lib/db';
 
 export async function GET() {
     return NextResponse.json(list('tasks'));

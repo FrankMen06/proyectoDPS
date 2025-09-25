@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getById, patch, replace, remove } from '../../../envs/db';
+import { getById, patch, replace, remove } from '@/lib/db';
 
 export async function GET(_, { params }) {
     const item = getById('tasks', params.id);
