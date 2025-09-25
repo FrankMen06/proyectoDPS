@@ -184,7 +184,7 @@ export default function TaskForm({ task = null, taskId = null, projectId = null,
                 <div className="col-lg-8">
                     <div className="card">
                         <div className="card-header">
-                            <h4 className="card-title mb-0">
+                            <h4 className="card-title mb-0" style={{ color: '#212529', fontWeight: 'bold' }}>
                                 {isEdit ? 'Editar Tarea' : 'Crear Nueva Tarea'}
                             </h4>
                         </div>
