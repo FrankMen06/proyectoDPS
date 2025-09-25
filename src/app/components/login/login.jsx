@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from "next/link";
 import { authService } from '@/app/services/auth.service';
-import { API_BASE_URL } from '@/app/envs/service';
 
 export default function Login() {
     const router = useRouter();
@@ -21,8 +20,6 @@ export default function Login() {
         e.preventDefault();
         setError('');
         setLoading(true);
-        console.log('ENV NEXT_PUBLIC_USE_NEXT_API =', process.env.NEXT_PUBLIC_USE_NEXT_API);
-        console.log('API_BASE_URL =', API_BASE_URL);
 
         try {
             const { user, session } = await authService.login(formData.email, formData.password);
