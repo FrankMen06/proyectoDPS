@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect, use } from 'react';
-import { taskService } from '../../../services/task.service';
-import { useAuthContext } from '../../../hooks/useAuthContext';
+import { taskService } from '@/app/services/task.service';
+import { useAuthContext } from '@/app/hooks/useAuthContext';
 import TaskForm from '../../../components/tasks/TaskForm';
 
 export default function EditTask({ params }) {

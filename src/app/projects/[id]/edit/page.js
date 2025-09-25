@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect, use } from 'react';
-import { projectService, userService } from '../../../services/project.service';
-import { useAuthContext } from '../../../hooks/useAuthContext';
+import { projectService, userService } from '@/app/services/project.service';
+import { useAuthContext } from '@/app/hooks/useAuthContext';
 import ProjectForm from '../../../components/projects/ProjectForm';
 
 export default function EditProject({ params }) {
