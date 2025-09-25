@@ -68,6 +68,8 @@ npm install -g json-server@0.17.4
 
 ## Ejecutar el Proyecto
 
+### IMPORTANTE: Si levantas local el proyecto debes ir al archivo service.js y el valor de la variable de entorno cambialo de true a false
+
 ### 1. Iniciar el Backend (JSON Server)
 **Desde el directorio del proyecto:**
 ```bash
